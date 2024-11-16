@@ -34,7 +34,7 @@ This is a web application for managing a chocolate shop where owners can manage 
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/chocolate_house.git
+   git clone https://github.com/CRShalini/chocolate-house
    ```
 
 2. **Navigate to the project directory**
