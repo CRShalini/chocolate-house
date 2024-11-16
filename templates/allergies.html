@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allergies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Reported Allergies</h1>
+        <ul>
+            {% for allergy in allergies %}
+                <li>
+                    {{ allergy.customer_name }} ({{ allergy.customer_email }}) 
+                    is allergic to <strong>{{ allergy.allergy_ingredient }}</strong>.
+                </li>
+            {% endfor %}
+        </ul>
+        <a class="back-link" href="{{ url_for('owner_home') }}">Back to owner Home</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Owner Dashboard</h1>
+
+        <h2>Flavors</h2>
+        <ul>
+            {% if flavors %}
+                {% for flavor in flavors %}
+                    <li>{{ flavor.name }} - {% if flavor.seasonal %}Seasonal{% else %}Not Seasonal{% endif %}</li>
+                {% endfor %}
+            {% else %}
+                <li>No flavors available.</li>
+            {% endif %}
+        </ul>
+
+        <h2>Ingredients</h2>
+        <ul>
+            {% if ingredients %}
+                {% for ingredient in ingredients %}
+                    <li>{{ ingredient.name }} - Quantity: {{ ingredient.quantity }}</li>
+                {% endfor %}
+            {% else %}
+                <li>No ingredients available.</li>
+            {% endif %}
+        </ul>
+
+        <ul>
+            <li><a href="{{ url_for('add_flavor') }}">Manage Flavors</a></li>
+            <li><a href="{{ url_for('add_ingredient') }}">Manage Ingredients</a></li>
+            <li><a href="{{ url_for('view_suggestions') }}">View Suggestions</a></li>
+            <li><a href="{{ url_for('view_allergies') }}">View Allergies</a></li>
+        </ul>
+
+        <a class="back-link" href="{{ url_for('index') }}">Back to Main Page</a>
+    </div>
+</body>
+</html>

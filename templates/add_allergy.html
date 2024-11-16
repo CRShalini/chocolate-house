@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Allergy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Report an Allergy</h1>
+        <form method="POST">
+            <label for="customer_name">Your Name:</label>
+            <input type="text" id="customer_name" name="customer_name" required>
+
+            <label for="customer_email">Your Email:</label>
+            <input type="email" id="customer_email" name="customer_email" required>
+
+            <label for="allergy_ingredient">Allergic Ingredient:</label>
+            <input type="text" id="allergy_ingredient" name="allergy_ingredient" required>
+
+            <button type="submit">Submit</button>
+        </form>
+        <a class="back-link" href="{{ url_for('customer_home') }}">Back to Home</a>
+    </div>
+</body>
+</html>
