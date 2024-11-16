@@ -9,38 +9,32 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-# Home route
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# owner route
 @app.route('/owner')
 def owner_home():
-    # Get all flavors and ingredients from the database
     flavors = Flavor.query.all()
     ingredients = Ingredient.query.all()
     return render_template('owner_home.html', flavors=flavors, ingredients=ingredients)
 
 
-# customer route
 @app.route('/customer')
 def customer_home():
     return render_template('customer_home.html')
 
-# Route to add a flavor
 @app.route('/add_flavor', methods=['GET', 'POST'])
 def add_flavor():
     if request.method == 'POST':
         flavor_name = request.form['name']
-        seasonal = request.form.get('seasonal') == 'on'  # Checkbox for seasonal
+        seasonal = request.form.get('seasonal') == 'on'  # Checkbox for seasonal flavours
         new_flavor = Flavor(name=flavor_name, seasonal=seasonal)
         db.session.add(new_flavor)
         db.session.commit()
         return redirect(url_for('owner_home'))
     return render_template('add_flavor.html')
 
-# Route to delete a flavor
 @app.route('/delete_flavor/<int:flavor_id>')
 def delete_flavor(flavor_id):
     flavor = Flavor.query.get(flavor_id)
@@ -49,7 +43,6 @@ def delete_flavor(flavor_id):
         db.session.commit()
     return redirect(url_for('owner_home'))
 
-# Route to add an ingredient
 @app.route('/add_ingredient', methods=['GET', 'POST'])
 def add_ingredient():
     if request.method == 'POST':
@@ -61,7 +54,6 @@ def add_ingredient():
         return redirect(url_for('owner_home'))
     return render_template('add_ingredient.html')
 
-# Route to delete an ingredient
 @app.route('/delete_ingredient/<int:ingredient_id>')
 def delete_ingredient(ingredient_id):
     ingredient = Ingredient.query.get(ingredient_id)
@@ -70,7 +62,6 @@ def delete_ingredient(ingredient_id):
         db.session.commit()
     return redirect(url_for('owner_home'))
 
-# Route to handle suggestions
 @app.route('/add_suggestion', methods=['GET', 'POST'])
 def add_suggestion():
     if request.method == 'POST':
@@ -83,13 +74,11 @@ def add_suggestion():
         return redirect(url_for('customer_home'))
     return render_template('add_suggestion.html')
 
-# Route to view all suggestions
 @app.route('/suggestions')
 def view_suggestions():
     suggestions = Suggestion.query.all()
     return render_template('suggestions.html', suggestions=suggestions)
 
-# Route to handle allergies
 @app.route('/add_allergy', methods=['GET', 'POST'])
 def add_allergy():
     if request.method == 'POST':
@@ -102,7 +91,6 @@ def add_allergy():
         return redirect(url_for('customer_home'))
     return render_template('add_allergy.html')
 
-# Route to view all allergies
 @app.route('/allergies')
 def view_allergies():
     allergies = Allergy.query.all()
